@@ -1,17 +1,19 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Programs1 extends RuntimeException {
 
     public static void main(String[] args) {
 
-        List<Integer> integers= Arrays.asList(1,2,3,4,5,6,6,4343,34);
+        String str="lokeshs";
 
-       Integer secondHighest= integers.stream().sorted(Comparator.reverseOrder()).skip(1).findFirst().orElse(null);
 
-        System.out.println(secondHighest);
+     Character firstNonRepetingChar=   str.chars().mapToObj(i-> (char) i)
+                .collect(Collectors.groupingBy(i-> i, LinkedHashMap::new,Collectors.counting()))
+             .entrySet().stream().filter(i-> i.getValue()==1).map(Map.Entry::getKey).findFirst().orElse(null);
+
+        System.out.println(firstNonRepetingChar);
+
 
     }
 
